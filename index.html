@@ -7,22 +7,54 @@
 <title>Entrar no grupo · PromoBeachTennis</title>
 <meta name="description" content="Cupons e ofertas de beach tennis direto no seu WhatsApp. Grupo VIP 100% grátis.">
 <link rel="icon" href="img/icon.png">
-<link rel="preload" as="image" href="img/bg.webp" fetchpriority="high">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<!-- Meta Pixel (carrega assíncrono, não trava a página) -->
+<!-- Fonte servida daqui mesmo (sem Google Fonts travando a tela). Ao trocar o
+     arquivo, troque também o nome (o cache dele é de 1 ano, ver vercel.json). -->
+<link rel="preload" href="fonts/outfit-latin-v15.woff2" as="font" type="font/woff2" crossorigin>
+<!-- A cena é o maior elemento da tela no celular (LCP): baixa primeiro. -->
+<link rel="preload" as="image" href="img/cena-941.webp" fetchpriority="high"
+      imagesrcset="img/cena-480.webp 480w, img/cena-720.webp 720w, img/cena-941.webp 941w"
+      imagesizes="(min-width:900px) 560px, 100vw">
+<!-- Meta Pixel: a fila (fbq) existe desde já, mas o fbevents.js (~200 KB) só
+     baixa depois que a página carregou, para não disputar banda com a cena. -->
 <script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+!function(f,b,e,v,n){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-document,'script','https://connect.facebook.net/en_US/fbevents.js');
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
+f.carregarPixel=function(){if(f.carregarPixel.foi)return;f.carregarPixel.foi=1;
+var t=b.createElement(e);t.async=!0;t.src=v;b.head.appendChild(t)};
+f.addEventListener('load',function(){(f.requestIdleCallback||setTimeout)(f.carregarPixel,{timeout:1500})});
+}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init','4493092660906965');
 fbq('track','PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=4493092660906965&ev=PageView&noscript=1"></noscript>
 <style>
+  @font-face{
+    font-family:Outfit;font-style:normal;font-weight:100 900;font-display:swap;
+    src:url(fonts/outfit-latin-v15.woff2) format("woff2");
+    unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  }
+  /* Fontes do sistema com as medidas da Outfit: enquanto a Outfit não chega o
+     texto já ocupa o mesmo espaço, então nada pula quando ela troca (CLS). */
+  /* Roboto: celulares Android. Arial (e Liberation, que tem as mesmas medidas):
+     Windows, Mac, iPhone e Linux. DejaVu: Linux sem Liberation, como o servidor
+     do PageSpeed. Cada valor é o meio da faixa em que nenhuma linha muda de
+     lugar entre 340 e 430px e no PC, medida com o texto desta LP. */
+  /* 100-400: texto normal e fino; 600-900: manchete, marca e botão */
+  @font-face{font-family:"Outfit Roboto";font-weight:100 400;src:local("Roboto"),local("Roboto-Regular");
+    size-adjust:97%;ascent-override:103.1%;descent-override:26.8%;line-gap-override:0%}
+  @font-face{font-family:"Outfit Roboto";font-weight:600 900;src:local("Roboto Bold"),local("Roboto-Bold");
+    size-adjust:104.5%;ascent-override:95.7%;descent-override:24.9%;line-gap-override:0%}
+  @font-face{font-family:"Outfit Arial";font-weight:100 400;
+    src:local("Arial"),local("ArialMT"),local("Liberation Sans"),local("LiberationSans");
+    size-adjust:96%;ascent-override:104.2%;descent-override:27.1%;line-gap-override:0%}
+  @font-face{font-family:"Outfit Arial";font-weight:600 900;
+    src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold"),local("LiberationSans-Bold");
+    size-adjust:99%;ascent-override:101.0%;descent-override:26.3%;line-gap-override:0%}
+  @font-face{font-family:"Outfit DejaVu";font-weight:100 400;src:local("DejaVu Sans"),local("DejaVuSans");
+    size-adjust:85.5%;ascent-override:117.0%;descent-override:30.4%;line-gap-override:0%}
+  @font-face{font-family:"Outfit DejaVu";font-weight:600 900;src:local("DejaVu Sans Bold"),local("DejaVuSans-Bold");
+    size-adjust:85%;ascent-override:117.6%;descent-override:30.6%;line-gap-override:0%}
   /* Medidas da arte em "u": 1u = 1px da arte original (941px de largura).
      No celular a arte ocupa a tela toda; no PC o u fica fixo e vira duas colunas. */
   :root{
@@ -36,15 +68,17 @@ fbq('track','PageView');
   html{-webkit-text-size-adjust:100%}
   body{
     margin:0;min-height:100dvh;color:var(--tinta);background:#032a05;overflow-x:hidden;
-    font-family:Outfit,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-weight:400;
+    font-family:Outfit,"Outfit Roboto","Outfit Arial","Outfit DejaVu",sans-serif;font-weight:400;
   }
 
   /* Fundo preso na tela (no print de página inteira o navegador estica esse
      fundo, por isso os prints saem de dois jeitos). Mesmo blur do PromoSpin. */
   .fundo{
     position:fixed;inset:0;z-index:-2;
-    background:url(img/bg.webp) center top/cover no-repeat #032a05;
-    filter:blur(24px);transform:scale(1.15);
+    /* fundo já vem borrado do arquivo (sem filter:blur, que pesa no celular);
+       o scale mantém o mesmo enquadramento de antes */
+    background:url(img/bg-m.webp) center top/cover no-repeat #032a05;
+    transform:scale(1.15);
   }
   .veu{position:fixed;inset:0;z-index:-1;background:rgba(2,30,6,.3)}
 
@@ -59,30 +93,31 @@ fbq('track','PageView');
   .pagina > main{margin-bottom:calc(30 * var(--u))}
 
   /* ---------- topo ---------- */
-  header{display:flex;align-items:center;gap:calc(26 * var(--u))}
+  /* topo em 60% do tamanho da arte original */
+  header{display:flex;align-items:center;gap:calc(15.6 * var(--u))}
   .logo{
-    width:calc(176 * var(--u));height:auto;flex:0 0 auto;display:block;
-    filter:drop-shadow(0 calc(6 * var(--u)) calc(14 * var(--u)) rgba(0,0,0,.35));
+    width:calc(105.6 * var(--u));height:auto;flex:0 0 auto;display:block;
+    filter:drop-shadow(0 calc(3.6 * var(--u)) calc(8.4 * var(--u)) rgba(0,0,0,.35));
   }
   .marca{
     position:relative;
-    border-left:max(1px,calc(2 * var(--u))) solid rgba(255,255,255,.7);
-    padding:calc(34 * var(--u)) 0 calc(40 * var(--u)) calc(30 * var(--u));
+    border-left:max(1px,calc(1.5 * var(--u))) solid rgba(255,255,255,.7);
+    padding:calc(20.4 * var(--u)) 0 calc(24 * var(--u)) calc(18 * var(--u));
     font-weight:800;font-style:italic;line-height:1;letter-spacing:-.03em;
-    font-size:calc(46 * var(--u));white-space:nowrap;
+    font-size:calc(27.6 * var(--u));white-space:nowrap;
     text-shadow:0 2px 10px rgba(0,0,0,.35);
   }
   .marca b{color:var(--laranja);font-weight:800}
   .marca svg{
-    position:absolute;left:calc(40 * var(--u));bottom:calc(18 * var(--u));
-    width:calc(300 * var(--u));height:calc(22 * var(--u));color:var(--laranja);
+    position:absolute;left:calc(24 * var(--u));bottom:calc(10.8 * var(--u));
+    width:calc(180 * var(--u));height:calc(13.2 * var(--u));color:var(--laranja);
   }
-  /* selo igual ao da minhaebike */
+  /* selo igual ao da minhaebike, em 70% do tamanho */
   .selo{
     margin-left:auto;flex:0 0 auto;white-space:nowrap;
-    font-weight:700;font-size:13px;color:#8de8b0;
+    font-weight:700;font-size:9.1px;color:#8de8b0;
     background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.35);border-radius:999px;
-    padding:6px 12px;
+    padding:4.2px 8.4px;
   }
 
   /* ---------- texto ---------- */
@@ -98,7 +133,10 @@ fbq('track','PageView');
     font-size:max(16px,calc(35 * var(--u)));line-height:1.4;
     text-shadow:0 1px 8px rgba(0,0,0,.55);
   }
-  .texto p strong{color:inherit;font-weight:600}
+  /* texto de apoio mais fino e em cinza claro, para não competir com a manchete */
+  .texto p:not(.vagas){font-weight:300;color:#cfd4d1}
+  /* as duas frases coladas, sem espaço entre elas */
+  .texto p.junto{margin-bottom:0}
   /* celular: bloco de texto centralizado */
   .texto{text-align:center}
   .texto p{margin-left:auto;margin-right:auto}
@@ -140,10 +178,19 @@ fbq('track','PageView');
   .cena{margin:calc(30 * var(--u)) calc(-50 * var(--u)) 0}
   .cena img{width:100%;height:auto;display:block}
 
+  /* ---------- celular ---------- */
+  @media (max-width:899px){
+    /* texto centralizado entre a manchete e o CTA (mesmo espaço em cima e
+       embaixo), CTA mais abaixo e o selo de vagas mais perto dele */
+    h1{margin-bottom:calc(88 * var(--u))}
+    a.botao{margin-top:calc(88 * var(--u))}
+    .texto .vagas{margin-top:calc(29 * var(--u))}
+  }
+
   /* ---------- PC ---------- */
   @media (min-width:900px){
     :root{--u:min(.8px, calc(100vh / 1000))}
-    .fundo{background-position:center 60%;filter:blur(30px)}
+    .fundo{background-image:url(img/bg-d.webp);background-position:center 60%}
     .veu{
       background:
         linear-gradient(90deg,rgba(2,28,6,.75) 0%,rgba(2,28,6,.45) 45%,rgba(2,28,6,.15) 100%),
@@ -180,7 +227,8 @@ fbq('track','PageView');
 
 <div class="pagina">
   <header>
-    <img class="logo" src="img/logo.webp" width="186" height="172" alt="PromoBeachTennis">
+    <img class="logo" src="img/logo-186.webp" srcset="img/logo-96.webp 96w, img/logo-186.webp 186w"
+         sizes="(min-width:900px) 85px, 11.3vw" width="186" height="172" alt="PromoBeachTennis">
     <div class="marca">Promo<b>BeachTennis</b>
       <svg viewBox="0 0 300 22" fill="none" aria-hidden="true"><path d="M4 18C70 6 170 2 296 6" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>
     </div>
@@ -189,8 +237,8 @@ fbq('track','PageView');
 
   <main class="texto">
     <h1>As melhores ofertas para quem <em>vive o Beach&nbsp;Tennis</em></h1>
-    <p>Entre no nosso grupo e receba os melhores <strong>cupons e ofertas</strong> para beach tennis, direto no seu WhatsApp.</p>
-    <p>Os melhores cupons acabam rápido, e quem está na nossa comunidade <strong>recebe em primeira mão</strong>.</p>
+    <p class="junto">Entre no nosso grupo e receba os melhores cupons e ofertas para beach tennis, direto no seu WhatsApp.</p>
+    <p>Os melhores cupons acabam rápido, e quem está na nossa comunidade recebe em primeira mão.</p>
     <a class="botao" id="entrar" href="https://chat.whatsapp.com/LsIMJGs3WjU198le3SS0iN" rel="noopener">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2m0 18.15a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24s8.24 3.7 8.24 8.24-3.7 8.24-8.24 8.24m4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07s.89 2.4 1.01 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28"/></svg>
       Entrar no grupo VIP
@@ -199,22 +247,36 @@ fbq('track','PageView');
   </main>
 
   <figure class="cena" style="margin-bottom:0">
-    <img src="img/cena.webp" width="941" height="866" decoding="async"
+    <img src="img/cena-941.webp" srcset="img/cena-480.webp 480w, img/cena-720.webp 720w, img/cena-941.webp 941w"
+         sizes="(min-width:900px) 560px, 100vw" width="941" height="866" fetchpriority="high"
          alt="Oferta no grupo PromoBeachTennis: raquete de beach tennis NG17 2026 de R$ 3.050,00 por R$ 2.550,00 com frete grátis">
   </figure>
 </div>
 
 <script>
-// Lead no toque do botão: dispara o evento e só então abre o convite do
-// WhatsApp (300ms para o pixel enviar antes da página sair).
+// Lead no toque do botão, por dois caminhos com o mesmo event_id (a Meta junta
+// os dois e conta um só):
+//  1. pixel no navegador (se o fbevents.js ainda não chegou, vai na fila);
+//  2. /api/lead -> Conversions API, que chega mesmo com bloqueador de anúncio
+//     ou quando a página sai antes do pixel enviar.
+// Depois abre o convite do WhatsApp (300ms para o pixel enviar).
 (function(){
   var btn=document.getElementById('entrar'); if(!btn) return;
   var foi=false;
+  function cookie(n){var m=document.cookie.match('(?:^|; )'+n+'=([^;]*)');return m?decodeURIComponent(m[1]):''}
   btn.addEventListener('click',function(ev){
     if(foi) return; foi=true;
+    var id='lead.'+Date.now()+'.'+Math.random().toString(36).slice(2,10);
+    var fbc=cookie('_fbc');
+    if(!fbc){var clid=new URLSearchParams(location.search).get('fbclid'); if(clid) fbc='fb.1.'+Date.now()+'.'+clid;}
+    try{
+      navigator.sendBeacon('/api/lead',new Blob([JSON.stringify(
+        {event_id:id,url:location.href,fbp:cookie('_fbp'),fbc:fbc})],{type:'text/plain'}));
+    }catch(e){}
     if(typeof fbq!=='function') return;
     ev.preventDefault();
-    fbq('track','Lead',{content_name:'Grupo VIP PromoBeachTennis'});
+    if(window.carregarPixel) carregarPixel();
+    fbq('track','Lead',{content_name:'Grupo VIP PromoBeachTennis'},{eventID:id});
     var url=btn.href;
     setTimeout(function(){ location.href=url; },300);
   });
